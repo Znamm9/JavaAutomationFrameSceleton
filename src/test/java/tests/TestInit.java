@@ -1,18 +1,21 @@
+package tests;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-public class TestAmazon {
+public class TestInit {
 
-    WebDriver driver;
+    public WebDriver driver;
 
-    @Test
-    public void one(){
+    @BeforeMethod
+    public void before(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
         driver = new ChromeDriver();
-        driver.get("https://amazon.com");
     }
 
+    @AfterMethod
     public void tearDown(){
         driver.quit();
     }
