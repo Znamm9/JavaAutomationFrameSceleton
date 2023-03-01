@@ -7,16 +7,21 @@ import org.testng.annotations.BeforeMethod;
 
 public class TestInit {
 
-    public WebDriver driver;
+//    public WebDriver driver;
+    public ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
     @BeforeMethod
     public void before(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-        driver = new ChromeDriver();
+        driver.set(new ChromeDriver());
+    }
+
+    public WebDriver getDriver(){
+        return driver.get();
     }
 
     @AfterMethod
     public void tearDown(){
-        driver.quit();
+        getDriver().quit();
     }
 }
